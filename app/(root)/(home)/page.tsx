@@ -5,76 +5,80 @@ import LocalSearchbar from "@/components/shared/LocalSearchbar";
 import NoResult from "@/components/shared/NoResult";
 import { Button } from "@/components/ui/button";
 import { HomePagefilter } from "@/constant/filter";
+import { getQuestions } from "@/lib/actions/question.action";
 import Link from "next/link";
 import React from "react";
 
-const questions = [
-  {
-    _id: "1",
-    title: "Cascading Deletes in SQLAlchemy?",
-    tags: [
-      { _id: "1", name: "python" },
-      { _id: "2", name: "sql" },
-    ],
-    author: {
-      _id: "a1",
-      name: "John Doe",
-      picture: "https://example.com/johndoe.png",
-    },
-    upvotes: 10,
-    views: 100,
-    answers: [],
-    createdAt: new Date("2021-09-01T12:00:00.000Z"),
-  },
-  {
-    _id: "2",
-    title: "How to center a Div?",
-    tags: [
-      { _id: "1", name: "css" },
-      { _id: "2", name: "html" },
-    ],
-    author: {
-      _id: "a2",
-      name: "Jane Smith",
-      picture: "https://example.com/janesmith.png",
-    },
-    upvotes: 1500000,
-    views: 200000,
-    answers: [],
-    createdAt: new Date("2021-09-01T12:00:00.000Z"),
-  },
-  {
-    _id: "3",
-    title: "What is TypeScript and why should I use it?",
-    tags: [
-      { _id: "3", name: "typescript" },
-      { _id: "4", name: "javascript" },
-    ],
-    author: {
-      _id: "a3",
-      name: "Mark Brown",
-      picture: "https://example.com/markbrown.png",
-    },
-    upvotes: 25,
-    views: 300,
-    answers: [
-      {
-        _id: "a3-1",
-        text: "TypeScript is a typed superset of JavaScript...",
-        author: {
-          _id: "a4",
-          name: "Bob Williams",
-          picture: "https://example.com/bobwilliams.png",
-        },
-        upvotes: 10,
-        createdAt: new Date("2023-09-15"),
-      },
-    ],
-    createdAt: new Date("2023-09-01T12:00:00.000Z"),
-  },
-];
+// Dummy datas
+// const questions = [
+//   {
+//     _id: "1",
+//     title: "Cascading Deletes in SQLAlchemy?",
+//     tags: [
+//       { _id: "1", name: "python" },
+//       { _id: "2", name: "sql" },
+//     ],
+//     author: {
+//       _id: "a1",
+//       name: "John Doe",
+//       picture: "https://example.com/johndoe.png",
+//     },
+//     upvotes: 10,
+//     views: 100,
+//     answers: [],
+//     createdAt: new Date("2021-09-01T12:00:00.000Z"),
+//   },
+//   {
+//     _id: "2",
+//     title: "How to center a Div?",
+//     tags: [
+//       { _id: "1", name: "css" },
+//       { _id: "2", name: "html" },
+//     ],
+//     author: {
+//       _id: "a2",
+//       name: "Jane Smith",
+//       picture: "https://example.com/janesmith.png",
+//     },
+//     upvotes: 1500000,
+//     views: 200000,
+//     answers: [],
+//     createdAt: new Date("2021-09-01T12:00:00.000Z"),
+//   },
+//   {
+//     _id: "3",
+//     title: "What is TypeScript and why should I use it?",
+//     tags: [
+//       { _id: "3", name: "typescript" },
+//       { _id: "4", name: "javascript" },
+//     ],
+//     author: {
+//       _id: "a3",
+//       name: "Mark Brown",
+//       picture: "https://example.com/markbrown.png",
+//     },
+//     upvotes: 25,
+//     views: 300,
+//     answers: [
+//       {
+//         _id: "a3-1",
+//         text: "TypeScript is a typed superset of JavaScript...",
+//         author: {
+//           _id: "a4",
+//           name: "Bob Williams",
+//           picture: "https://example.com/bobwilliams.png",
+//         },
+//         upvotes: 10,
+//         createdAt: new Date("2023-09-15"),
+//       },
+//     ],
+//     createdAt: new Date("2023-09-01T12:00:00.000Z"),
+//   },
+// ];
 
-const Home = () => {
+const Home = async () => {
+  const result = await getQuestions({});
+
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -104,8 +108,8 @@ const Home = () => {
       <HomeFilters />
 
       <div className="mt-10 flex flex-col gap-6">
-        {questions.length > 0 ? (
-          questions.map((question) => (
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
