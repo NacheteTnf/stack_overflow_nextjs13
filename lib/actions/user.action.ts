@@ -19,6 +19,7 @@ export async function getUserById(params:any) {
         console.log(error);
         throw error;
 }
+}
 
 export async function createUser(userData: CreateUserParams) {
     try {
@@ -32,7 +33,7 @@ export async function createUser(userData: CreateUserParams) {
     }
   }
   
-  export async function updateUser(params: UpdateUserParams) {
+export async function updateUser(params: UpdateUserParams) {
     try {
       connectToDatabase();
   
@@ -49,7 +50,7 @@ export async function createUser(userData: CreateUserParams) {
     }
   }
   
-  export async function deleteUser(params: DeleteUserParams) {
+export async function deleteUser(params: DeleteUserParams) {
     try {
       connectToDatabase();
   
@@ -63,24 +64,24 @@ export async function createUser(userData: CreateUserParams) {
       // and question, answer, comment from database
   
       // get user id from user
-       const userQuestionIds = await Question.find({ author: user._id }).distinct(
-         "_id"
-       );
+     //  const userQuestionIds = await Question.find({ author: user._id }).distinct("_id");
   
       // delete question from database
-      // @ts-ignore
+      
       await Question.deleteMany({ author: user._id });
   
       // TODO: delete answer, answer from database
   
-      // @ts-ignore
+     
       const deletedUser = await User.findByIdAndDelete(user._id);
        return deletedUser;
   
       // finish delete user from database
-      //
+
     } catch (error) {
       console.log(error);
       throw error;
     }
-  }
+}
+
+
