@@ -1,12 +1,6 @@
-import { ReactNode } from "react";
+import React from "react";
 
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Auth — DevOverflow",
-};
-
-const Layout = ({ children }: { children: ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="flex min-h-screen w-full items-center justify-center">
       {children}
